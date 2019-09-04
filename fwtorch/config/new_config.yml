@@ -1,0 +1,51 @@
+
+note: 'train'
+# configs of data
+multiscale: False
+
+hyper: {
+        T: 2,
+        source_update_mode: 'global',
+        target_update_mode: 'global',
+        ematch_dis: 'l1',
+        adv_loss: 'mse'
+        }
+optim: {
+        learning_rate: 2.5e-4,
+        learning_rate_D: 1.0e-4,
+        warmup_steps: 5000,
+        num_steps: 100000,
+        weight_decay: 0.0005,
+        momentum: 0.9,
+        power: 0.9
+        }
+log: {
+        print_freq: 1,
+        save_freq: 2,
+        tensorboard: True
+        }
+data: {
+        source: 'gta5',
+        target: 'cityscapes',
+        worker: 4,
+        batch_size: 1
+        }
+
+coeff: { seg_loss: 1.0, 
+        match_loss: 0.0, 
+        adv_loss: 0.0, 
+        Tce_loss: 0, 
+        Tentropy_loss: 0.001, 
+        Sentropy_loss: 0.001, 
+        E_match_loss: 0.01
+        }
+
+model: {
+        fp16: True,
+        multi_scale: False,
+        pre_model: './snapshot/pre_model.pth',
+        mode: 'source-only',
+        fp16: True,
+        }
+
+
